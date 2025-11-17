@@ -1,0 +1,140 @@
+/* ----------------------------
+   Responsive helpers & layout
+   ---------------------------- */
+
+/* Tipografía fluida */
+h1 {
+  font-size: clamp(1.6rem, 4vw, 3.2rem);
+}
+
+/* Contenedor principal - deja que crezca y sea cómodo en móviles */
+#app {
+  padding: clamp(1rem, 3vw, 2rem);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Imágenes siempre adaptables */
+#app img,
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+/* Mejora visual y adaptación de las "cards" (artículos dentro de #app) */
+/* No cambia nombres de clases existentes; aplica a elementos <article> dentro de #app */
+#app article {
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  color: inherit;
+  box-sizing: border-box;
+  margin: 0.75rem 0;
+}
+
+/* Si usas .card en partes estáticas, que mantenga proporción */
+.card {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Grid responsivo: en pantallas grandes mostramos varias columnas */
+@media (min-width: 860px) {
+  /* convertimos #app en grid con columnas fluidas */
+  #app {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    align-items: start;
+  }
+
+  /* los article tendrán el estilo de tarjeta dentro del grid */
+  #app article {
+    margin: 0; /* el grid maneja el espaciado */
+  }
+}
+
+/* En pantallas muy grandes, limitamos ancho de lectura y centramos */
+@media (min-width: 1280px) {
+  #app {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Botones: tamaño completo en pantallas pequeñas para facilidad de toque */
+@media (max-width: 520px) {
+  button {
+    width: 100%;
+    padding: 0.9em 1em;
+    font-size: 1rem;
+    display: inline-block;
+  }
+}
+
+/* Formularios / inputs fluidos (si tienes inputs creados dinámicamente) */
+#app input,
+input,
+textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0.6rem;
+  margin: 0.35rem 0 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.2);
+  color: inherit;
+  font: inherit;
+}
+
+/* Meta y textos pequeños más legibles en móviles */
+#app p,
+#app small {
+  font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+  line-height: 1.4;
+}
+
+/* Ajustes visuales para que las tarjetas se vean bien en modo claro */
+@media (prefers-color-scheme: light) {
+  #app article {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.9));
+    border: 1px solid rgba(0,0,0,0.06);
+    color: inherit;
+  }
+
+  input, textarea {
+    background: #fff;
+    border-color: rgba(0,0,0,0.08);
+  }
+}
+
+/* Utilidad: pequeña transición para hover en tarjetas */
+#app article {
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+#app article:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+}
+
+/* Evitar que contenidos gigantes rompan el layout */
+#app pre,
+#app code {
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Pequeño ajuste para asegurar compatibilidad con navegadores antiguos */
+@supports (display: grid) {
+  /* nada aquí, solo confirmación de soporte */
+}
